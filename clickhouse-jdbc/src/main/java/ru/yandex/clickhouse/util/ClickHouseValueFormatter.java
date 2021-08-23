@@ -54,27 +54,26 @@ public final class ClickHouseValueFormatter {
         }
         char[] hexArray =
             {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-        char[] hexChars = new char[bytes.length * 6 - 2];
+        char[] hexChars = new char[bytes.length * 5 - 1];
 
         int currentByte;
         int byteIndex;
 
         for (byteIndex = 0; byteIndex < bytes.length - 1; byteIndex++) {
             currentByte = bytes[byteIndex] & 0xFF;
-            hexChars[byteIndex * 6]     = '0';
-            hexChars[byteIndex * 6 + 1] = 'x';
-            hexChars[byteIndex * 6 + 2] = hexArray[currentByte >>> 4];
-            hexChars[byteIndex * 6 + 3] = hexArray[currentByte & 0x0F];
-            hexChars[byteIndex * 6 + 4] = ',';
-            hexChars[byteIndex * 6 + 5] = ' ';
+            hexChars[byteIndex * 5]     = '0';
+            hexChars[byteIndex * 5 + 1] = 'x';
+            hexChars[byteIndex * 5 + 2] = hexArray[currentByte >>> 4];
+            hexChars[byteIndex * 5 + 3] = hexArray[currentByte & 0x0F];
+            hexChars[byteIndex * 5 + 4] = ',';
         }
 
         // last byte should be without space and comma
         currentByte = bytes[byteIndex] & 0xFF;
-        hexChars[byteIndex * 6]     = '0';
-        hexChars[byteIndex * 6 + 1] = 'x';
-        hexChars[byteIndex * 6 + 2] = hexArray[currentByte >>> 4];
-        hexChars[byteIndex * 6 + 3] = hexArray[currentByte & 0x0F];
+        hexChars[byteIndex * 5]     = '0';
+        hexChars[byteIndex * 5 + 1] = 'x';
+        hexChars[byteIndex * 5 + 2] = hexArray[currentByte >>> 4];
+        hexChars[byteIndex * 5 + 3] = hexArray[currentByte & 0x0F];
 
         return new String(hexChars);
     }
