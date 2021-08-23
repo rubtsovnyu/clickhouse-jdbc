@@ -63,8 +63,8 @@ public final class ClickHouseValueFormatter {
             currentByte = bytes[byteIndex] & 0xFF;
             hexChars[byteIndex * 6]     = '0';
             hexChars[byteIndex * 6 + 1] = 'x';
-            hexChars[byteIndex * 6 + 2] = hexArray[currentByte / 16];
-            hexChars[byteIndex * 6 + 3] = hexArray[currentByte % 16];
+            hexChars[byteIndex * 6 + 2] = hexArray[currentByte >>> 4];
+            hexChars[byteIndex * 6 + 3] = hexArray[currentByte & 0x0F];
             hexChars[byteIndex * 6 + 4] = ',';
             hexChars[byteIndex * 6 + 5] = ' ';
         }
@@ -73,8 +73,8 @@ public final class ClickHouseValueFormatter {
         currentByte = bytes[byteIndex] & 0xFF;
         hexChars[byteIndex * 6]     = '0';
         hexChars[byteIndex * 6 + 1] = 'x';
-        hexChars[byteIndex * 6 + 2] = hexArray[currentByte / 16];
-        hexChars[byteIndex * 6 + 3] = hexArray[currentByte % 16];
+        hexChars[byteIndex * 6 + 2] = hexArray[currentByte >>> 4];
+        hexChars[byteIndex * 6 + 3] = hexArray[currentByte & 0x0F];
 
         return new String(hexChars);
     }
